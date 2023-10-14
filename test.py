@@ -27,6 +27,9 @@ class Testing(unittest.TestCase):
     def test_decrypte_message1(self):
         self.assertEqual(dec.decrypte_message1("indice1_chiffre.txt"),"PANGRAMME")
         self.assertEqual(dec.decrypte_message1("motCrypteTest.txt"),"ARTHUR")
+    
+    def test_decrypte_vignère(self):
+        self.assertEqual(dec.decrypte_vignère(dec.import_texte("indice2_chiffre.txt"),"PANGRAMME"),"LE VIF ZEPHIR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX\nIL CACHE DANS LA REPETITION LE SECRET DE CES MURMURES MALHEUREUX\nNE GARDEZ DU PREMIER SOUFFLE QUE LES PREMIERES APPARITIONS\nET AINSI DEVOILEZ LE MESSAGE CACHE DERRIERE LA SUBSTITUTION")
 
 
 
