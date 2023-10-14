@@ -47,3 +47,14 @@ def decrypte_message1(chemin):
                 res += lettre.upper()
                 mot = False
     return res
+
+def decrypte_vignère(mot,cle):
+    res = ""
+    espace=0
+    for ind in range(len(mot)):
+        if mot[ind] != " " and mot[ind] != "\n":
+            res+= chr((ord(mot[ind])-(ord(cle[(ind-espace)%len(cle)]))+26)%26+65)
+        else:
+            res+=mot[ind]
+            espace+=1
+    return res
