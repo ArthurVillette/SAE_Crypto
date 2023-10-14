@@ -31,3 +31,19 @@ def decrypte_cesar(mot,decalage) :
         else :
             rep += char
     return rep
+
+def decrypte_message1(chemin):
+    mot=True
+    res=""
+    texte_crypté=import_texte(chemin)
+    lettre_courant= lettre_la_plus_commune(texte_crypté)
+    decalage = get_decalage(lettre_courant)
+    message_clair = decrypte_cesar(texte_crypté,decalage)
+    for lettre in message_clair:
+        if lettre == "\n":
+            mot = True
+        else :
+            if mot :
+                res += lettre.upper()
+                mot = False
+    return res
