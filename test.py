@@ -36,6 +36,12 @@ class Testing(unittest.TestCase):
         self.assertEqual(dec.premiere_occurence_chaque_lettre("PANGRAMME"),"PANGRME")
         self.assertEqual(dec.premiere_occurence_chaque_lettre("LE VIF ZEPHIR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX"),"LEVIFZPHRJUBSKMQATDCOWNGX")
 
+    def test_cree_dico_substitution(self) :
+        self.assertEqual(dec.cree_dico_substitution("QSD"),{"A":"Q","B":"S","C":"D"})
+        self.assertEqual(dec.cree_dico_substitution("RTYUZ"),{"A":"R","B":"T","C":"Y","D":"U","E":"Z"})
+        self.assertEqual(dec.cree_dico_substitution("ETLWKOPDF"),{"A":"E","B":"T","C":"L","D":"W","E":"K","F":"O","G":"P","H":"D","I":"F"})
+
+
 
 
 if __name__ == '__main__':
