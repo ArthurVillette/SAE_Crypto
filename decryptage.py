@@ -121,3 +121,17 @@ def premiere_occurence_chaque_lettre(code) :
         if lettre not in res and lettre.isalpha() :
             res += lettre
     return res
+
+def cree_dico_substitution(mot:str) -> dict:
+    """la fonction renvoie un dictionnaire de substitution
+
+    Args:
+        mot (_String_): le texte
+
+    Returns:
+        _dict_: le dictionnaire de substitution
+    """
+    dico = dict()
+    for i in range(len(mot)) :
+        dico[chr(i+65)] = mot[i]
+    return dico
