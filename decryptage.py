@@ -106,3 +106,18 @@ def decrypte_vignère(mot:str,cle:str)->str:
             res+=mot[ind]
             espace+=1
     return res
+
+def premiere_occurence_chaque_lettre(code) :
+    """la fonction renvoie la première occurence de chaque lettre dans un texte
+
+    Args:
+        code (_String_): le texte
+
+    Returns:
+        _String_: la première occurence de chaque lettre
+    """
+    res = ""
+    for lettre in code :
+        if lettre not in res and lettre.isalpha() :
+            res += lettre
+    return res
