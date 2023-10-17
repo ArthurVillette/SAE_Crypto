@@ -133,5 +133,28 @@ def cree_dico_substitution(mot:str) -> dict:
     """
     dico = dict()
     for i in range(len(mot)) :
-        dico[chr(i+65)] = mot[i]
+        dico[mot[i]] = chr(i+65)
     return dico
+
+def decrypte_substitution(mot:str,dico:dict)->str:
+    """la fonction renvoie le texte décrypté avec la méthode de substitution
+
+    Args:
+        mot (_String_): le texte à décrypter
+        dico (_dict_): le dictionnaire de substitution
+
+    Returns:
+        _String_: le texte décrypté
+    """
+    res = ""
+    for lettre in mot :
+        if lettre in dico :
+            res += dico[lettre]
+        else :
+            res += lettre
+    return res
+
+
+temp1 = cree_dico_substitution(premiere_occurence_chaque_lettre("LE VIF ZEPHIR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX"))
+print(temp1)
+print(decrypte_substitution(import_texte("indice3_chiffre.txt"),temp1))

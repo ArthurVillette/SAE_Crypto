@@ -37,9 +37,9 @@ class Testing(unittest.TestCase):
         self.assertEqual(dec.premiere_occurence_chaque_lettre("LE VIF ZEPHIR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX"),"LEVIFZPHRJUBSKMQATDCOWNGX")
 
     def test_cree_dico_substitution(self) :
-        self.assertEqual(dec.cree_dico_substitution("QSD"),{"A":"Q","B":"S","C":"D"})
-        self.assertEqual(dec.cree_dico_substitution("RTYUZ"),{"A":"R","B":"T","C":"Y","D":"U","E":"Z"})
-        self.assertEqual(dec.cree_dico_substitution("ETLWKOPDF"),{"A":"E","B":"T","C":"L","D":"W","E":"K","F":"O","G":"P","H":"D","I":"F"})
+        self.assertEqual(dec.cree_dico_substitution("QSD"),{"Q":"A","S":"B","D":"C"})
+        self.assertEqual(dec.cree_dico_substitution("RTYUZ"),{"R":"A","T":"B","Y":"C","U":"D","Z":"E"})
+        self.assertEqual(dec.cree_dico_substitution("ETLWKOPDF"),{"E":"A","T":"B","L":"C","W":"D","K":"E","O":"F","P":"G","D":"H","F":"I"})
 
 
 
