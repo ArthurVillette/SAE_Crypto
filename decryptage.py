@@ -107,6 +107,19 @@ def decrypte_vignère(mot:str,cle:str)->str:
             espace+=1
     return res
 
+def decrypte_message2(chemin:str)->str:
+    """la fonction renvoie le message 2 décrypté
+
+    Args:
+        chemin (_String_): le chemin du fichier texte
+
+    Returns:
+        _String_: le message 2 décrypté
+    """
+    mot = import_texte(chemin)
+    cle = decrypte_message1("indice1_chiffre.txt")
+    return decrypte_vignère(mot,cle)
+
 def premiere_occurence_chaque_lettre(code) :
     """la fonction renvoie la première occurence de chaque lettre dans un texte
 
