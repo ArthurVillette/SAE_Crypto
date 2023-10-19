@@ -106,3 +106,77 @@ def decrypte_vignère(mot:str,cle:str)->str:
             res+=mot[ind]
             espace+=1
     return res
+
+def decrypte_message2(chemin:str)->str:
+    """la fonction renvoie le message 2 décrypté
+
+    Args:
+        chemin (_String_): le chemin du fichier texte
+
+    Returns:
+        _String_: le message 2 décrypté
+    """
+    mot = import_texte(chemin)
+    cle = decrypte_message1("indice1_chiffre.txt")
+    return decrypte_vignère(mot,cle)
+
+def premiere_occurence_chaque_lettre(code) :
+    """la fonction renvoie la première occurence de chaque lettre dans un texte
+
+    Args:
+        code (_String_): le texte
+
+    Returns:
+        _String_: la première occurence de chaque lettre
+    """
+    res = ""
+    for lettre in code :
+        if lettre not in res and lettre.isalpha() :
+            res += lettre
+    return res
+
+def cree_dico_substitution(mot:str) -> dict:
+    """la fonction renvoie un dictionnaire de substitution
+
+    Args:
+        mot (_String_): le texte
+
+    Returns:
+        _dict_: le dictionnaire de substitution
+    """
+    dico = dict()
+    for i in range(len(mot)) :
+        dico[mot[i]] = chr(i+65)
+    return dico
+
+def decrypte_substitution(mot:str,dico:dict)->str:
+    """la fonction renvoie le texte décrypté avec la méthode de substitution
+
+    Args:
+        mot (_String_): le texte à décrypter
+        dico (_dict_): le dictionnaire de substitution
+
+    Returns:
+        _String_: le texte décrypté
+    """
+    res = ""
+    for lettre in mot :
+        if lettre in dico :
+            res += dico[lettre]
+        else :
+            res += lettre
+    return res
+
+def decrypte_message3(chemin:str)->str:
+    """la fonction renvoie le message 3 décrypté
+
+    Args:
+        chemin (_String_): le chemin du fichier texte
+
+    Returns:
+        _String_: le message 3 décrypté
+    """
+    mot = import_texte(chemin)
+    cle = decrypte_message2("indice2_chiffre.txt")
+    cle = cle.split("\n")[0]
+    return decrypte_substitution(mot,cree_dico_substitution(premiere_occurence_chaque_lettre(cle)))

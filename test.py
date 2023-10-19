@@ -29,7 +29,24 @@ class Testing(unittest.TestCase):
         self.assertEqual(dec.decrypte_message1("motCrypteTest.txt"),"ARTHUR")
     
     def test_decrypte_vignère(self):
-        self.assertEqual(dec.decrypte_vignère(dec.import_texte("indice2_chiffre.txt"),"PANGRAMME"),"LE VIF ZEPHIR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX\nIL CACHE DANS LA REPETITION LE SECRET DE CES MURMURES MALHEUREUX\nNE GARDEZ DU PREMIER SOUFFLE QUE LES PREMIERES APPARITIONS\nET AINSI DEVOILEZ LE MESSAGE CACHE DERRIERE LA SUBSTITUTION")
+        self.assertEqual(dec.decrypte_vignère(dec.import_texte("indice2_chiffre.txt"),"PANGRAMME"),"LE VIF ZEPHYR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX\nIL CACHE DANS LA REPETITION LE SECRET DE CES MURMURES MALHEUREUX\nNE GARDEZ DU PREMIER SOUFFLE QUE LES PREMIERES APPARITIONS\nET AINSI DEVOILEZ LE MESSAGE CACHE DERRIERE LA SUBSTITUTION")
+
+    def test_premiere_occurence_chaque_lettre(self) :
+        self.assertEqual(dec.premiere_occurence_chaque_lettre("ARTHUR"),"ARTHU")
+        self.assertEqual(dec.premiere_occurence_chaque_lettre("PANGRAMME"),"PANGRME")
+        self.assertEqual(dec.premiere_occurence_chaque_lettre("LE VIF ZEPHYR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX"),"LEVIFZPHYRJUBSKMQATDCOWNGX")
+
+    def test_cree_dico_substitution(self) :
+        self.assertEqual(dec.cree_dico_substitution("QSD"),{"Q":"A","S":"B","D":"C"})
+        self.assertEqual(dec.cree_dico_substitution("RTYUZ"),{"R":"A","T":"B","Y":"C","U":"D","Z":"E"})
+        self.assertEqual(dec.cree_dico_substitution("ETLWKOPDF"),{"E":"A","T":"B","L":"C","W":"D","K":"E","O":"F","P":"G","D":"H","F":"I"})
+        
+    def test_decrypte_message2(self) :
+        self.assertEqual(dec.decrypte_message2("indice2_chiffre.txt"),"LE VIF ZEPHYR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX\nIL CACHE DANS LA REPETITION LE SECRET DE CES MURMURES MALHEUREUX\nNE GARDEZ DU PREMIER SOUFFLE QUE LES PREMIERES APPARITIONS\nET AINSI DEVOILEZ LE MESSAGE CACHE DERRIERE LA SUBSTITUTION")
+        
+    def test_decrypte_message3(self) :
+        self.assertEqual(dec.decrypte_message3("indice3_chiffre_correct.txt"),"BRAVO, VOUS AVEZ GAGNE! LE CODE A FOURNIR EST: ELIZEBETH")
+
 
 
 
