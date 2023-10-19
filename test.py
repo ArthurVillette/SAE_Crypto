@@ -43,6 +43,9 @@ class Testing(unittest.TestCase):
         
     def test_decrypte_message2(self) :
         self.assertEqual(dec.decrypte_message2("indice2_chiffre.txt"),"LE VIF ZEPHYR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX\nIL CACHE DANS LA REPETITION LE SECRET DE CES MURMURES MALHEUREUX\nNE GARDEZ DU PREMIER SOUFFLE QUE LES PREMIERES APPARITIONS\nET AINSI DEVOILEZ LE MESSAGE CACHE DERRIERE LA SUBSTITUTION")
+        
+    def test_decrypte_message3(self) :
+        self.assertEqual(dec.decrypte_message3("indice3_chiffre_correct.txt"),"BRAVO, VOUS AVEZ GAGNE! LE CODE A FOURNIR EST: ELIZEBETH")
 
 
 
