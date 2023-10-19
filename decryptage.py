@@ -167,8 +167,16 @@ def decrypte_substitution(mot:str,dico:dict)->str:
             res += lettre
     return res
 
+def decrypte_message3(chemin:str)->str:
+    """la fonction renvoie le message 3 décrypté
 
-temp1 = cree_dico_substitution(premiere_occurence_chaque_lettre("LE VIF ZEPHIR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX"))
-print(temp1)
-dico = {'L': 'A', 'E': 'B', 'V': 'C', 'I': 'D', 'F': 'E', 'Z': 'F', 'P': 'G', 'H': 'H', 'R': 'I', 'J': 'J', 'U': 'K', 'B': 'L', 'S': 'N', 'K': 'O', 'M': 'N', 'Q': 'P', 'A': 'Q', 'T': 'R', 'D': 'S', 'C': 'T', 'O': 'U', 'W': 'V', 'N': 'W', 'G': 'X', 'X': 'Z', 'Y': 'Y'}
-print(decrypte_substitution(import_texte("indice3_chiffre.txt"),dico))
+    Args:
+        chemin (_String_): le chemin du fichier texte
+
+    Returns:
+        _String_: le message 3 décrypté
+    """
+    mot = import_texte(chemin)
+    cle = decrypte_message2("indice2_chiffre.txt")
+    cle = cle.split("\n")[0]
+    return decrypte_substitution(mot,cree_dico_substitution(premiere_occurence_chaque_lettre(cle)))
