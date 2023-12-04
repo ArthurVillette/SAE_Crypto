@@ -1,4 +1,4 @@
-
+from DES import *
 
 mot_cripté = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P'AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE. YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
 
@@ -180,3 +180,18 @@ def decrypte_message3(chemin:str)->str:
     cle = decrypte_message2("indice2_chiffre.txt")
     cle = cle.split("\n")[0]
     return decrypte_substitution(mot,cree_dico_substitution(premiere_occurence_chaque_lettre(cle)))
+            
+def double_cryptage_SDES(message, cle1, cle2) :
+    byte_mess = bytes(message, "utf-8")
+    byte_cle1 = cle1.to_bytes(3, "big")
+    byte_cle2 = cle2.to_bytes(3, "big")
+    c1 = [encrypt(int.from_bytes(byte_cle1, "big"), m) for m in byte_mess]
+    c2 = [encrypt(int.from_bytes(byte_cle2, "big"), m) for m in c1]
+    return c2
+
+def double_decryptage_SDES(message, cle1, cle2) :
+    byte_cle1 = cle1.to_bytes(3, "big")
+    byte_cle2 = cle2.to_bytes(3, "big")
+    d2 = [decrypt(int.from_bytes(byte_cle2, "big"), m) for m in message]
+    d1 = [decrypt(int.from_bytes(byte_cle1, "big"), m) for m in d2]
+    return bytes(d1).decode("utf-8")

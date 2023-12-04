@@ -46,6 +46,17 @@ class Testing(unittest.TestCase):
         
     def test_decrypte_message3(self) :
         self.assertEqual(dec.decrypte_message3("indice3_chiffre_correct.txt"),"BRAVO, VOUS AVEZ GAGNE! LE CODE A FOURNIR EST: ELIZEBETH")
+        
+    def test_double_cryptage_SDES(self) :
+        self.assertEqual(dec.double_cryptage_SDES("test",2,5),[180, 36, 90, 180])
+        self.assertEqual(dec.double_cryptage_SDES("t",2,2),[95])
+        self.assertEqual(dec.double_cryptage_SDES("ceci est un test",2,5),[103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180])
+        
+    def test_double_decryptage_SDES(self) :
+        self.assertEqual(dec.double_decryptage_SDES([180, 36, 90, 180],2,5),"test")
+        self.assertEqual(dec.double_decryptage_SDES([95],2,2),"t")
+        self.assertEqual(dec.double_decryptage_SDES([103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180],2,5),"ceci est un test")
+    
 
 
 
