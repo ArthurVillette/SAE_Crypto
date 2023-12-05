@@ -195,3 +195,21 @@ def double_decryptage_SDES(message, cle1, cle2) :
     d2 = [decrypt(int.from_bytes(byte_cle2, "big"), m) for m in message]
     d1 = [decrypt(int.from_bytes(byte_cle1, "big"), m) for m in d2]
     return bytes(d1).decode("utf-8")
+
+def cassage_brutal_SDES(message_clair,message_chiffre) :
+    """la fonction renvoie la clé de chiffrement de SDES
+
+    Args:
+        message_clair (_String_): le message clair
+        message_chiffre (_String_): le message chiffré
+
+    Returns:
+        tuple: la clé de chiffrement
+    """
+    for i in range(1024) :
+        for j in range(1024) :
+            if double_cryptage_SDES(message_clair,i,j) == message_chiffre :
+                return (i,j)
+            
+
+print(cassage_brutal_SDES("test",double_cryptage_SDES("test",2,5)))
