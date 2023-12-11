@@ -189,6 +189,7 @@ def double_cryptage_SDES(message, cle1, cle2) :
     c1 = [encrypt(int.from_bytes(byte_cle1, "big"), m) for m in byte_mess]
     c2 = [encrypt(int.from_bytes(byte_cle2, "big"), m) for m in c1]
     return c2
+
 def cryptage_SDES(message, cle) :
     byte_mess = bytes(message, "utf-8")
     byte_cle = cle.to_bytes(3, "big")
@@ -221,7 +222,7 @@ def cassage_brutal_SDES(message_clair,message_chiffre) :
         for j in range(1024) :
             if double_cryptage_SDES(message_clair,i,j) == message_chiffre :
                 return (i,j)
-    return None   
+    return None
 
 
 def cassage_Astucieux_SDES(message_clair,message_chiffre):
@@ -234,22 +235,21 @@ def cassage_Astucieux_SDES(message_clair,message_chiffre):
     Returns:
         tuple: la clé de chiffrement
     """
+    dico = {}
     for i in range(1024) :
-        for j in range(1024) :
-            if double_cryptage_SDES(message_clair,i,j) == message_chiffre :
-                return (i,j)
-            if double_cryptage_SDES(message_clair,j,i) == message_chiffre :
-                return (j,i)
-    return None 
+        dico[str(cryptage_SDES(message_clair,i))] = i
+        if str(decryptage_SDES(message_chiffre,i)) in dico :
+            return (dico[str(decryptage_SDES(message_chiffre,i))],i)
+    for j in range(1024) :
+        if str(decryptage_SDES(message_chiffre,j)) in dico :
+            return (dico[str(decryptage_SDES(message_chiffre,j))],j)
             
-# t1 = time.perf_counter()
-# print(cassage_Astucieux_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",2,5)))
-# t2 = time.perf_counter()
-# print(t2-t1)
+t1 = time.perf_counter()
+print(cassage_Astucieux_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",215,598)))
+t2 = time.perf_counter()
+print(t2-t1)
 
-# t3 = time.perf_counter()
-# print(cassage_brutal_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",2,5)))
-# t4 = time.perf_counter()
-# print(t4-t3)
-
-print(cryptage_SDES("ceci est un test",10))
+t3 = time.perf_counter()
+print(cassage_brutal_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",2,5)))
+t4 = time.perf_counter()
+print(t4-t3)
