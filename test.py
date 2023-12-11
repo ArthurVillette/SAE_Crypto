@@ -61,6 +61,14 @@ class Testing(unittest.TestCase):
         self.assertEqual(dec.cassage_brutal_SDES("test",[180, 36, 90, 180]),(2,5))
         self.assertEqual(dec.cassage_brutal_SDES("ceci est un test",[103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180]),(2,5))
     
+    def test_cryptage_SDES(self) :
+        self.assertEqual(dec.cryptage_SDES("test",2),[179, 64, 77, 179])
+        self.assertEqual(dec.cryptage_SDES("t",5),[138])
+        self.assertEqual(dec.cryptage_SDES("ceci est un test",10),[104, 6, 104, 173, 234, 6, 249, 213, 234, 69, 210, 234, 213, 6, 249, 213])
+        
+    def test_cassage_Astucieux_SDES(self):
+        self.assertEqual(dec.cassage_Astucieux_SDES("test",[180, 36, 90, 180]),(2,5))
+        self.assertEqual(dec.cassage_Astucieux_SDES("ceci est un test",[103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180]),(2,5))
 
 
 
