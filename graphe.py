@@ -13,7 +13,7 @@ t1= timeur("ceci est un test",[171, 205, 171, 225, 168, 205, 83, 252, 168, 253, 
 print(t1)
 t2= timeur("ceci est un test",[103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180])
 print(t2)
-t3= timeur("SAE CRYPTOGRAPHIE",[198, 202, 38, 252, 114, 188, 210, 89, 226, 48, 64, 188, 202, 89, 143, 110, 38])
+t3= timeur("ceci est un test",[33, 6, 33, 166, 252, 6, 122, 115, 252, 58, 201, 252, 115, 6, 122, 115])
 print(t3)
 # t4= timeur("SAE CRYPTOGRAPHIE",[62, 129, 136, 45, 17, 18, 177, 219, 154, 36, 15, 18, 129, 219, 166, 167, 136])
 # print(t4)
@@ -47,7 +47,7 @@ def compteur_brutal (message_clair,message_chiffre) :
     return compteur  
 
 
-def cassage_Astucieux_SDES(message_clair,message_chiffre):
+def compteur_astucieux (message_clair,message_chiffre):
     """la fonction renvoie la clé de chiffrement de SDES
 
     Args:
@@ -71,21 +71,21 @@ def cassage_Astucieux_SDES(message_clair,message_chiffre):
 
 c1= compteur_brutal("ceci est un test",[171, 205, 171, 225, 168, 205, 83, 252, 168, 253, 134, 168, 252, 205, 83, 252])
 print(c1)
-c2= compteur_brutal("test",[180, 36, 90, 180])
+c2= compteur_brutal("ceci est un test",[103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180])
 print(c2)
-c3= compteur_brutal("SAE CRYPTOGRAPHIE",[198, 202, 38, 252, 114, 188, 210, 89, 226, 48, 64, 188, 202, 89, 143, 110, 38])
+c3= compteur_brutal("ceci est un test",[33, 6, 33, 166, 252, 6, 122, 115, 252, 58, 201, 252, 115, 6, 122, 115])
 print(c3)
-Ca1= cassage_Astucieux_SDES("ceci est un test",[171, 205, 171, 225, 168, 205, 83, 252, 168, 253, 134, 168, 252, 205, 83, 252])
+Ca1= compteur_astucieux("ceci est un test",[171, 205, 171, 225, 168, 205, 83, 252, 168, 253, 134, 168, 252, 205, 83, 252])
 print(Ca1)
-Ca2= cassage_Astucieux_SDES("test",[180, 36, 90, 180])
+Ca2= compteur_astucieux("ceci est un test",[103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180])
 print(Ca2)
-Ca3= cassage_Astucieux_SDES("SAE CRYPTOGRAPHIE",[198, 202, 38, 252, 114, 188, 210, 89, 226, 48, 64, 188, 202, 89, 143, 110, 38])
+Ca3= compteur_astucieux("ceci est un test",[33, 6, 33, 166, 252, 6, 122, 115, 252, 58, 201, 252, 115, 6, 122, 115])
 print(Ca3)
 
 
 size=["[1,1]","[2,5]","[20,50]"]
-compteur_brutal=[c1,c2,c3]
-comteur_astucieux=[Ca1,Ca2,Ca3]
-plt.plot(size,compteur_brutal)
-plt.plot(size,comteur_astucieux)
+brutal=[c1,c2,c3]
+astucieux=[Ca1,Ca2,Ca3]
+plt.plot(size,brutal)
+plt.plot(size,astucieux)
 plt.show()
