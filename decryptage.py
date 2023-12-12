@@ -1,5 +1,9 @@
 from DES import *
 import time
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import padding
+import os
 
 mot_cripté = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P'AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE. YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
 
@@ -35,7 +39,6 @@ def lettre_la_plus_commune(mot_cripte:str) -> str:
             if lettre != " ":
                 alphabe[lettre.upper()] = 1
     return max(alphabe, key=alphabe.get)
-
 def get_decalage(lettre_la_plus_commune:str)->int:
     """la fonction renvoie le décalage entre la lettre la plus commune et la lettre E
 
@@ -107,6 +110,7 @@ def decrypte_vignère(mot:str,cle:str)->str:
             res+=mot[ind]
             espace+=1
     return res
+
 
 def decrypte_message2(chemin:str)->str:
     """la fonction renvoie le message 2 décrypté
@@ -244,12 +248,57 @@ def cassage_Astucieux_SDES(message_clair,message_chiffre):
         if str(decryptage_SDES(message_chiffre,j)) in dico :
             return (dico[str(decryptage_SDES(message_chiffre,j))],j)
             
-t1 = time.perf_counter()
-print(cassage_Astucieux_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",215,598)))
-t2 = time.perf_counter()
-print(t2-t1)
+# t1 = time.perf_counter()
+# print(cassage_Astucieux_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",215,598)))
+# t2 = time.perf_counter()
+# print(t2-t1)
 
-t3 = time.perf_counter()
-print(cassage_brutal_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",2,5)))
-t4 = time.perf_counter()
-print(t4-t3)
+# t3 = time.perf_counter()
+# print(cassage_brutal_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",double_cryptage_SDES("anticurloeeazsazdzadazddfszfiqzfhzekofkforejgporgjropegjerpogjrepogjrepogjrpogjefsefsef",2,5)))
+# t4 = time.perf_counter()
+# print(t4-t3)
+
+
+def cryptage_AES (message, clee_chiffrage):
+    """la fonction renvoie le message crypté avec la méthode AES
+
+    Args:
+        message (_String_): le message à crypter
+        cle (_String_): la clé de cryptage
+
+    Returns:
+        _String_: le message crypté
+    """
+    clee_chiffrage = clee_chiffrage.ljust(32)[:32].encode()
+    iv = os.urandom(16)
+    cipher = Cipher(algorithms.AES(clee_chiffrage), modes.CFB(iv), backend=default_backend())
+    padder = padding.PKCS7(128).padder()
+    data = padder.update(message.encode()) + padder.finalize()
+    encryptor = cipher.encryptor()
+    texteCrypte = encryptor.update(data) + encryptor.finalize()
+
+    return iv + texteCrypte
+
+
+def decrypt_AES(texteCrypte, clee_chiffrage):
+    """la fonction renvoie le message décrypté avec la méthode AES
+
+    Args:
+        texteCrypte (_String_): le message à décrypter
+        cle (_String_): la clé de décryptage
+        
+    Returns:
+        _String_: le message décrypté
+    """
+    iv = texteCrypte[:16]
+    texteCrypte = texteCrypte[16:]
+    clee_chiffrage = clee_chiffrage.ljust(32)[:32].encode()
+    cipher = Cipher(algorithms.AES(clee_chiffrage), modes.CFB(iv), backend=default_backend())
+    decryptor = cipher.decryptor()
+    data = decryptor.update(texteCrypte) + decryptor.finalize()
+    unpadder = padding.PKCS7(128).unpadder()
+    message = unpadder.update(data) + unpadder.finalize()
+    return message.decode()
+
+print(cryptage_AES("SAE","Romain"))
+print(decrypt_AES(cryptage_AES("SAE","Romain"),"Romain"))

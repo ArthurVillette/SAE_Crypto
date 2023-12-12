@@ -69,6 +69,12 @@ class Testing(unittest.TestCase):
     def test_cassage_Astucieux_SDES(self):
         self.assertEqual(dec.cassage_Astucieux_SDES("test",[180, 36, 90, 180]),(2,5))
         self.assertEqual(dec.cassage_Astucieux_SDES("ceci est un test",[103, 36, 103, 128, 73, 36, 90, 180, 73, 92, 175, 73, 180, 36, 90, 180]),(2,5))
+    
+    def test_decryptage_AES(self) :
+        self.assertEqual(dec.decrypt_AES(b'\x85\x03DK\x07\xe3Gw\x9e\x9c\x7f\x98\xfa\x08\xa4\xdd^\xa0L\xf1>\xf6\n\x92\xd8]\xd5f\x8dg\xa5a',"SUPER CLE"),"AES")
+        self.assertEqual(dec.decrypt_AES(b"(\x973\xd5/'\x94\xd79?\xed\xc5\xc9/\xef\xe5fH\xa3\x00\xaa\x82\x86\xd4~\xb7\xda\x87\xc6p\xda\xf1","Arthur"),"Bourrito")
+        self.assertEqual(dec.decrypt_AES(b'\xc1\x867Y\x08\xd8\xc8\xc7C\x06\t\xf2\xc9\xe5\xd4/b\xd0,\xe8\xa9\xded\xfe\xbf\x8c*<,\xf3\xd1P',"Romain"),"SAE")
+        
 
 
 
