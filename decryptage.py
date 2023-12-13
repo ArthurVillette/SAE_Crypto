@@ -4,6 +4,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding
 import os
+from PIL import Image
 
 mot_cripté = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P'AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE. YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
 
@@ -302,3 +303,26 @@ def decrypt_AES(texteCrypte, clee_chiffrage):
 
 print(cryptage_AES("SAE","Romain"))
 print(decrypt_AES(cryptage_AES("SAE","Romain"),"Romain"))
+
+def analyse_image(chemin:str)->None:
+    """la fonction affiche l'image
+
+    Args:
+        chemin (_String_): le chemin de l'image
+    """
+    image = Image.open(chemin)
+    res = ""
+    widht, height = image.size
+    for i in range(height):
+        for j in range(widht):
+            couleur = image.getpixel((j,i))
+            if couleur % 2 == 0:
+                res += "0"
+            else:
+                res += "1"
+    return res
+ 
+
+temp = analyse_image("images/rossignol2.bmp")
+temp = temp[:64]
+print(temp)
