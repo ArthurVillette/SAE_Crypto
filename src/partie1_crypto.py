@@ -122,7 +122,7 @@ def decrypte_message2(chemin:str)->str:
         _String_: le message 2 décrypté
     """
     mot = import_texte(chemin)
-    cle = decrypte_message1("indice1_chiffre.txt")
+    cle = decrypte_message1("./txt/indice1_chiffre.txt")
     return decrypte_vignère(mot,cle)
 
 def premiere_occurence_chaque_lettre(code) :
@@ -182,7 +182,7 @@ def decrypte_message3(chemin:str)->str:
         _String_: le message 3 décrypté
     """
     mot = import_texte(chemin)
-    cle = decrypte_message2("indice2_chiffre.txt")
+    cle = decrypte_message2("./txt/indice2_chiffre.txt")
     cle = cle.split("\n")[0]
     return decrypte_substitution(mot,cree_dico_substitution(premiere_occurence_chaque_lettre(cle)))
             
