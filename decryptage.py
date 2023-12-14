@@ -321,8 +321,10 @@ def analyse_image(chemin:str)->None:
             else:
                 res += "1"
     return res
+
+def get_message_image(chemin:str)->str :
+    res = analyse_image(chemin)
+    return res[:64]
  
 
-temp = analyse_image("images/rossignol2.bmp")
-temp = temp[:64]
-print(temp)
+print(get_message_image("images/rossignol2.bmp"))
