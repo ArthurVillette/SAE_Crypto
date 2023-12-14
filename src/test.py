@@ -2,6 +2,7 @@ import unittest
 import partie1_crypto as dec
 import SDES as sdes
 import AES as aes
+import image as img
 mot_cripté = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P'AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE. YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
 
 class Testing(unittest.TestCase):
@@ -74,6 +75,9 @@ class Testing(unittest.TestCase):
         self.assertEqual(aes.decrypt_AES(b'\x85\x03DK\x07\xe3Gw\x9e\x9c\x7f\x98\xfa\x08\xa4\xdd^\xa0L\xf1>\xf6\n\x92\xd8]\xd5f\x8dg\xa5a',"SUPER CLE"),"AES")
         self.assertEqual(aes.decrypt_AES(b"(\x973\xd5/'\x94\xd79?\xed\xc5\xc9/\xef\xe5fH\xa3\x00\xaa\x82\x86\xd4~\xb7\xda\x87\xc6p\xda\xf1","Arthur"),"Bourrito")
         self.assertEqual(aes.decrypt_AES(b'\xc1\x867Y\x08\xd8\xc8\xc7C\x06\t\xf2\xc9\xe5\xd4/b\xd0,\xe8\xa9\xded\xfe\xbf\x8c*<,\xf3\xd1P',"Romain"),"SAE")
+        
+    def test_get_message_image(self) :
+        self.assertEqual(img.get_message_image("images/rossignol2.bmp"),"1110011101101101001100010011111110010010101110011001000001001100")
         
 
 
