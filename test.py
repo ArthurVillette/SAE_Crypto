@@ -75,6 +75,9 @@ class Testing(unittest.TestCase):
         self.assertEqual(dec.decrypt_AES(b"(\x973\xd5/'\x94\xd79?\xed\xc5\xc9/\xef\xe5fH\xa3\x00\xaa\x82\x86\xd4~\xb7\xda\x87\xc6p\xda\xf1","Arthur"),"Bourrito")
         self.assertEqual(dec.decrypt_AES(b'\xc1\x867Y\x08\xd8\xc8\xc7C\x06\t\xf2\xc9\xe5\xd4/b\xd0,\xe8\xa9\xded\xfe\xbf\x8c*<,\xf3\xd1P',"Romain"),"SAE")
         
+    def test_get_message_image(self) :
+        self.assertEqual(dec.get_message_image("images/rossignol2.bmp"),"1110011101101101001100010011111110010010101110011001000001001100")
+        
 
 
 
