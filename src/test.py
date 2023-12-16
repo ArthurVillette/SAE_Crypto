@@ -3,6 +3,7 @@ import partie1_crypto as dec
 import SDES as sdes
 import AES as aes
 import image as img
+import reseau as res
 mot_cripté = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P'AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE. YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
 
 class Testing(unittest.TestCase):
@@ -86,7 +87,8 @@ class Testing(unittest.TestCase):
         self.assertEqual(aes.decrypt_AES_CBC(b'#\xd4\x1e\xb0\xcf%\xe1=W\xf7\xf5b\xb3\x962/NzO\xe0?\xeb\x1d\x94\xe5\xa9\x14l\xac\x0c\xf4\xd7', cle_256_bytes, b'\x9dG\x00\x13\x0fB\xe7+\x90V\x9d\xfeQ\xdb\x159'), "un autre message")
         self.assertEqual(aes.decrypt_AES_CBC(b'\x08H\xe8\x8e\x81\x14\xa5e\x02\x1b\xac\xd3\x00\xe2@i0\xd1<JocX\xaeZ\x94\x89\x0f|\xce\xd6\xe7', cle_256_bytes, b'DV\x7f\xa7\x94\xf2J\x84\xcb\xe6\xf5\xd2P\xf2\x9el'), "un dernier message")
 
-
+    def test_decrypte_UDP(self) :
+        self.assertEqual(res.decrypte_UDP("traces/trace_sae.cap"), ["La crypto c'est trop bien!", "Je suis complètement d'accord!"])
 
 
 
