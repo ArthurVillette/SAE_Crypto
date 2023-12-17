@@ -5,7 +5,17 @@ import time
 import matplotlib.pyplot as plt
 
 arsene= open("./txt/arsene_lupin_extrait.txt","r",encoding="utf-8").read()
+
 def timeur (message_clair,message_chiffre) :
+    """renvoit le temps d'execution du cassage brutal et astucieux
+
+    Args:
+        message_clair (String): le message decrypté
+        message_chiffre (String): le message crypté
+
+    Returns:
+        tuple : les temps d'execution 
+    """    
     t1 = time.perf_counter()
     sdes.cassage_brutal_SDES(message_clair,message_chiffre)
     t2 = time.perf_counter()
@@ -61,6 +71,17 @@ def compteur_astucieux (message_clair,message_chiffre):
 
 
 def timeur_cryptage(phrase_claire,clee_SDES1, clee_SDES12,clee_AES):
+    """renvoit le temps de cryptage pour un chiffrement SDES et AES
+
+    Args:
+        phrase_claire (String): le message decrypté 
+        clee_SDES1 (String): la première clé SDES
+        clee_SDES12 (String): la deuxième clé SDES
+        clee_AES (String): La clé AES
+
+    Returns:
+        tuple : les temps d'execution 
+    """    
     t1 = time.perf_counter()
     SDES= sdes.double_cryptage_SDES(phrase_claire,clee_SDES1, clee_SDES12)
     t2 = time.perf_counter()
@@ -69,6 +90,17 @@ def timeur_cryptage(phrase_claire,clee_SDES1, clee_SDES12,clee_AES):
     return (t2-t1,t3-t2)
 
 def timeur_decryptage(phrase_crypte_SDES,phrase_crypte_AES,clee_SDES1,clee_SDES2,clee_AES):
+    """renvoit le temps de decryptage pour un chiffrement SDES et AES
+
+    Args:
+        phrase_claire (String): le message decrypté 
+        clee_SDES1 (String): la première clé SDES
+        clee_SDES12 (String): la deuxième clé SDES
+        clee_AES (String): La clé AES
+
+    Returns:
+        tuple : les temps d'execution 
+    """    
     t1 = time.perf_counter()
     SDES= sdes.double_decryptage_SDES(phrase_crypte_SDES,clee_SDES1,clee_SDES2)
     t2 = time.perf_counter()
