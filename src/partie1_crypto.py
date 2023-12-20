@@ -1,4 +1,9 @@
-
+from DES import *
+import time
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import padding
+import os
 
 mot_cripté = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P'AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE. YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
 
@@ -34,7 +39,7 @@ def lettre_la_plus_commune(mot_cripte:str) -> str:
             if lettre != " ":
                 alphabe[lettre.upper()] = 1
     return max(alphabe, key=alphabe.get)
-
+    
 def get_decalage(lettre_la_plus_commune:str)->int:
     """la fonction renvoie le décalage entre la lettre la plus commune et la lettre E
 
@@ -107,6 +112,7 @@ def decrypte_vignère(mot:str,cle:str)->str:
             espace+=1
     return res
 
+
 def decrypte_message2(chemin:str)->str:
     """la fonction renvoie le message 2 décrypté
 
@@ -117,7 +123,7 @@ def decrypte_message2(chemin:str)->str:
         _String_: le message 2 décrypté
     """
     mot = import_texte(chemin)
-    cle = decrypte_message1("indice1_chiffre.txt")
+    cle = "PANGRAMME"
     return decrypte_vignère(mot,cle)
 
 def premiere_occurence_chaque_lettre(code) :
@@ -177,6 +183,11 @@ def decrypte_message3(chemin:str)->str:
         _String_: le message 3 décrypté
     """
     mot = import_texte(chemin)
-    cle = decrypte_message2("indice2_chiffre.txt")
+    cle = "LE VIF ZEPHYR JUBILE SUR LES KUMQUATS DU CLOWN GRACIEUX\nIL CACHE DANS LA REPETITION LE SECRET DE CES MURMURES MALHEUREUX\nNE GARDEZ DU PREMIER SOUFFLE QUE LES PREMIERES APPARITIONS\nET AINSI DEVOILEZ LE MESSAGE CACHE DERRIERE LA SUBSTITUTION"
     cle = cle.split("\n")[0]
     return decrypte_substitution(mot,cree_dico_substitution(premiere_occurence_chaque_lettre(cle)))
+            
+
+
+
+
